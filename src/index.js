@@ -1,13 +1,13 @@
-function refreshWeather(response) {
-  let temperatureElement = document.querySelector("#temperature");
+function changeWeather(response) {
+  let temperatureElement = document.getElementById("temperature");
   let temperature = response.data.temperature.current;
-  let cityElement = document.querySelector("#city");
-  let descriptionElement = document.querySelector("#description");
-  let humidityElement = document.querySelector("#humidity");
-  let windSpeedElement = document.querySelector("#wind-speed");
-  let timeElement = document.querySelector("#time");
+  let cityElement = document.getElementById("city");
+  let descriptionElement = document.getElementById("description");
+  let humidityElement = document.getElementById("humidity");
+  let windSpeedElement = document.getElementById("wind-speed");
+  let timeElement = document.getElementById("time");
   let date = new Date(response.data.time * 1000);
-  let iconElement = document.querySelector("#icon");
+  let iconElement = document.getElementById("icon");
 
   cityElement.innerHTML = response.data.city;
   timeElement.innerHTML = formatDate(date);
@@ -40,19 +40,18 @@ function formatDate(date) {
 }
 
 function searchCity(city) {
-  let apiKey = "b2a5adcct04b33178913oc335f405433";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
-  axios.get(apiUrl).then(refreshWeather);
+  let apiKey = "043fo3afb4t56ba7c16f40bfab647517";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(changeWeather);
 }
 
-function handleSearchSubmit(event) {
+function handleFormSearch(event) {
   event.preventDefault();
-  let searchInput = document.querySelector("#search-form-input");
-
+  let searchInput = document.getElementById("search-form-input");
   searchCity(searchInput.value);
 }
 
-let searchFormElement = document.querySelector("#search-form");
-searchFormElement.addEventListener("submit", handleSearchSubmit);
+let searchFormElement = document.getElementById("search-form");
+searchFormElement.addEventListener("submit", handleFormSearch);
 
-searchCity("Paris");
+searchCity("India");
